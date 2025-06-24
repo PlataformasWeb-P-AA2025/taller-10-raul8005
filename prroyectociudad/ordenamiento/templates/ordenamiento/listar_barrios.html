@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Barrios</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; }
+        h1 { color: #2c3e50; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Barrios o Ciudadelas</h1>
+
+    <nav>
+        <a href="{% url 'inicio' %}"> Ver Parroquias</a>
+        <a href="{% url 'crear_parroquia' %}">Nueva Parroquia</a>
+        <a href="{% url 'crear_barrio' %}">Nuevo Barrio</a>
+    </nav>
+
+    {% if barrios %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Viviendas</th>
+                    <th>Parques</th>
+                    <th>Edificios</th>
+                    <th>Parroquia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for barrio in barrios %}
+                    <tr>
+                        <td>{{ barrio.nombre }}</td>
+                        <td>{{ barrio.numero_viviendas }}</td>
+                        <td>{{ barrio.numero_parques }}</td>
+                        <td>{{ barrio.numero_edificios_residenciales }}</td>
+                        <td>{{ barrio.parroquia.nombre }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay barrios registrados.</p>
+    {% endif %}
+</body>
+</html>

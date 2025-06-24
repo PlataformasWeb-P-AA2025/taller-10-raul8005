@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parroquias y sus Barrios</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }
+        h1, h2, h3 { color: #2c3e50; }
+        .parroquia {
+            background: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        ul { margin-left: 20px; }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Parroquias y sus Barrios</h1>
+
+    <nav>
+        <a href="{% url 'inicio' %}"> Ver Parroquias</a>
+        <a href="{% url 'listar_barrios' %}">Ver Barrios</a>
+        <a href="{% url 'crear_parroquia' %}">Nueva Parroquia</a>
+        <a href="{% url 'crear_barrio' %}">Nuevo Barrio</a>
+    </nav>
+
+    {% for parroquia in parroquias %}
+        <div class="parroquia">
+            <h2>{{ parroquia.nombre }}</h2>
+            <p>Ubicación: {{ parroquia.get_ubicacion_display }} | Tipo: {{ parroquia.get_tipo_display }}</p>
+            <h3>Barrios o Ciudadelas:</h3>
+            <ul>
+                {% for barrio in parroquia.barrios.all %}
+                    <li>{{ barrio.nombre }} — {{ barrio.numero_viviendas }} viviendas, {{ barrio.numero_parques }} parques</li>
+                {% empty %}
+                    <li>No hay barrios registrados.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% empty %}
+        <p>No hay parroquias registradas.</p>
+    {% endfor %}
+</body>
+</html>

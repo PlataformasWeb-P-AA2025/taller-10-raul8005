@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Barrio</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f2f2f2; }
+        h1 { color: #2c3e50; }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Nuevo Barrio o Ciudadela</h1>
+
+    <nav>
+        
+        <a href="{% url 'crear_parroquia' %}">Nueva Parroquia</a>
+        <a href="{% url 'inicio' %}">Ver Parroquias</a>
+        <a href="{% url 'listar_barrios' %}">Ver Barrios</a>
+    </nav>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Barrio</button>
+    </form>
+</body>
+</html>
