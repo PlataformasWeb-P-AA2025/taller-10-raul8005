@@ -20,7 +20,7 @@ def crear_parroquia(request):
         form = ParroquiaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('inicio')  # Asegúrate que exista la URL con name='inicio'
+            return redirect('inicio')  
     else:
         form = ParroquiaForm()
     return render(request, 'ordenamiento/crear_parroquia.html', {'form': form})
